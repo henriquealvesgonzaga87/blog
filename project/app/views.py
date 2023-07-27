@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Post
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -52,3 +52,18 @@ class UpdatePost(UpdateView, LoginRequiredMixin):
         else:
             form.save
         return super().form_valid(form)
+
+
+class DeletePost(LoginRequiredMixin, DeleteView):
+    model = Post
+    template_name = 'app/index.html'
+
+    def get_post(self):
+        id = self.kwargs.get('id')
+        return get_object_or_404(Post, id=id)
+
+    def success_url(self, form):
+        id = self.kwargs.get('id')
+        return reverse_lazy('app/index.html', kwargs={id: 'id'})
+    
+
