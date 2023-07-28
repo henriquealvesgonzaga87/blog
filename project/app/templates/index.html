@@ -7,6 +7,21 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello World!</h1>
+    {% for post in page_obj %}
+    <section>
+        <p>{{ post.title }}</p>
+        <p>{{ post.content }}</p>
+        <p>{{ post.tags }}</p>
+        {% if user.is_authenticated %}
+        <form method="GET" action="{% url 'app:update_post' id=post.id %}">
+            <button type="submit">Update</button>
+        </form>
+        <form method="POST" action="{% url 'app:delete_post' id=post.id %}">{% csrf_token %}
+            <button type="submit">Delete</button>
+        </form>
+        {% endif %}
+    </section>
+    <br>
+    {% endfor %}
 </body>
 </html>
