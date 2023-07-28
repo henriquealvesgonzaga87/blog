@@ -4,9 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Create Post</title>
 </head>
 <body>
-    Criar o post
+    <form action="submit" method="POST" id="register_post">{% csrf_token %}
+        <label for="title">Title</label><br>
+        <input type="text" name="title" id="{{ post.title }}">
+        <br> <br>
+        <label for="content">Content</label><br>
+        <textarea name="content" cols="30" rows="10" form="register_post">{{ post.content }}</textarea><br>
+        <br>
+        <label for="tags">Tags</label><br>
+        <input type="text" name="tags" id="{{ post.tags }}"><br>
+        <br>
+        <button type="submit">Send</button>
+        <button type="reset">Clear</button>
+    </form>
 </body>
 </html>
