@@ -36,9 +36,9 @@ class UpdatePost(UpdateView, LoginRequiredMixin):
     template_name = 'app/create_post.html'
     model = Post
     fields = ['title', 'content', 'tags']
-    success_url = reverse_lazy('app:index.html')
+    success_url = reverse_lazy('app:index')
 
-    def get_post(self):
+    def get_object(self):
         id = self.kwargs.get('id')
         return get_object_or_404(Post, id=id)
 
@@ -46,24 +46,28 @@ class UpdatePost(UpdateView, LoginRequiredMixin):
         try:
             post = form.save(commit=False)
             post.user_profile_id = User.objects.get(id=self.request.user.id)
-        except Exception:
-            messages.error('Impossible to save')
-            print(Exception)
+        except Exception as e:
+            messages.error(self.request, 'Impossible to save')
+            print(e)
         else:
-            form.save
+            form.save()
         return super().form_valid(form)
 
 
 class DeletePost(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'app/index.html'
+    success_url = reverse_lazy('app:index')
 
-    def get_post(self):
-        id = self.kwargs.get('id')
-        return get_object_or_404(Post, id=id)
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get('id')
+        return get_object_or_404(Post, pk=pk)
 
-    def success_url(self, form):
-        id = self.kwargs.get('id')
-        return reverse_lazy('app/index.html', kwargs={id: 'id'})
-    
-
+    def delete(self, request, *args, **kwargs):
+        try:
+            messages.success(request, 'Post deleted successfully.')
+            return super().delete(request, *args, **kwargs)
+        except Exception as e:
+            messages.error(request, 'Unable to delete the post.')
+            print(e)
+            return super().delete(request, *args, **kwargs)
