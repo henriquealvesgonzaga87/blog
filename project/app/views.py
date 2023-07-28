@@ -29,7 +29,7 @@ class CreatePost(CreateView, LoginRequiredMixin):
             print(Exception)
         else:
             form.save()
-        return super().form_valid(form)
+        return redirect("app:index")
 
 
 class UpdatePost(UpdateView, LoginRequiredMixin):
