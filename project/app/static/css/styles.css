@@ -18,9 +18,10 @@ body {
 .overlay-content {
   position: relative;
   top: 25%;
-  width: 25%;
-  text-align: center;
+  width: 50%;
+  text-align: left;
   margin-top: 30px;
+  white-space: nowrap;
 }
 
 .overlay a {
@@ -30,6 +31,7 @@ body {
   color: white;
   display: block;
   transition: 0.3s;
+  white-space: nowrap;
 }
 
 .overlay a:hover, .overlay a:focus {
