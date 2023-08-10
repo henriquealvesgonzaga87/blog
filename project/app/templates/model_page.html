@@ -7,12 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HG</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/styles_aboutme.css' %}"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <header>
         <script>
             function openNav() {
-                document.getElementById("myNav").style.width = "25%";
+                document.getElementById("myNav").style.width = "30%";
             }
             
             function closeNav() {
@@ -23,9 +27,9 @@
             <div id="myNav" class="overlay">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                 <div class="overlay-content">
-                    <a href="#">About</a>
-                    <a href="#">Services</a>
-                    <a href="#">Clients</a>
+                    <a href="{% url 'about_me' %}">About</a>
+                    <a href="#">Projects</a>
+                    <a href="#">My path</a>
                     <a href="#">Contact</a>
                 </div>
                 </div>
