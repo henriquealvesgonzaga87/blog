@@ -21,3 +21,19 @@ class Post(models.Model):
 
     class Meta:
         db_table = 'post'
+
+
+class MyPath(models.Model):
+    title = models.CharField(max_length=100)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    description = models.TextField()
+    link = models.URLField()
+    user_profile_id = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'mypath'
+    
+
+    def get_formatted_date(self):
+        return f"{self.start_date.strftime('%m/%Y')} - {self.end_date.strftime('%m/%Y')}"
