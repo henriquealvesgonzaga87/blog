@@ -23,16 +23,17 @@ class Post(models.Model):
         db_table = 'post'
 
 
-class MyPath(models.Model):
+class MyStudies(models.Model):
     title = models.CharField(max_length=100)
+    school = models.CharField(max_length=80)
     start_date = models.DateField()
     end_date = models.DateField()
     description = models.TextField()
-    link = models.URLField()
+    link = models.URLField(null=True)
     user_profile_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
-        db_table = 'mypath'
+        db_table = 'mystudies'
     
 
     def get_formatted_date(self):

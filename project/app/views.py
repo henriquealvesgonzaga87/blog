@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Post
+from .models import Post, MyStudies
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
@@ -71,3 +71,28 @@ class DeletePost(LoginRequiredMixin, DeleteView):
             messages.error(request, 'Unable to delete the post.')
             print(e)
             return super().delete(request, *args, **kwargs)
+
+
+class ListMyStudies(ListView):
+    template_name = 'my_path.html'
+    paginate_by = 10
+    model = MyStudies
+
+
+class CreateMyStudies(CreateView, LoginRequiredMixin):
+    template_name = "create_my_path.html"
+    model = MyStudies
+    fields = ['title', 'school', 'start_date', 'end_date', 'description', 'link']
+    success_url = reverse_lazy('my_path')
+
+
+    def form_valid(self, form):
+        try:
+            mystudies = form.save(commit=False)
+            mystudies.user_profile_id = User.objects.get(id=self.request.user.id)
+        except Exception:
+            messages.error('Impossible to save your form now')
+        else:
+            form.save()
+        return super().form_valid(form)
+    

@@ -9,3 +9,7 @@ class UserAdmin(admin.ModelAdmin):
 @admin.register(Post)
 class PostAdmmin(admin.ModelAdmin):
     fields = ['title', 'content', 'tags', 'user_profile_id']
+
+@admin.register(MyStudies)
+class MyStudiesAdmin(admin.ModelAdmin):
+    fields = ['title', 'school', 'start_date', 'end_date', 'description', 'link', 'user_profile_id']

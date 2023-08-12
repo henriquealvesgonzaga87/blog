@@ -1,0 +1,63 @@
+{% extends "model_page.html" %}
+
+{% block content %}
+    <main>
+        <div class="container">
+            <form method="post" id="mystudies-form">{% csrf_token %}
+                <div class="row">
+                    <div class="col-25">
+                      <label for="{{ form.title.id_for_label }}">Title</label>
+                    </div>
+                    <div class="col-75">
+                      {{ form.title }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-25">
+                      <label for="{{ form.school.id_for_label }}">School</label>
+                    </div>
+                    <div class="col-75">
+                      {{ form.school }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-25">
+                      <label for="{{ form.start_date.id_for_label }}">Start date</label>
+                    </div>
+                    <div class="col-75">
+                      {{ form.start_date }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-25">
+                      <label for="{{ form.end_date.id_for_label }}">End Date</label>
+                    </div>
+                    <div class="col-75">
+                      {{ form.end_date }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-25">
+                      <label for="{{ form.description.id_for_label }}">Description</label>
+                    </div>
+                    <div class="col-75">
+                      {{ form.description }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-25">
+                      <label for="{{ form.link.id_for_label }}">Link</label>
+                    </div>
+                    <div class="col-75">
+                      {{ form.link }}
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <input type="submit" value="Submit">
+                    <input type="reset" value="Clear">
+                  </div>
+            </form>
+        </div>
+    </main>
+{% endblock %}

@@ -17,9 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
+from app.views import ListMyStudies, CreateMyStudies
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name="about_me.html"), name="about_me"),
+    path('my_path/', ListMyStudies.as_view(template_name = 'my_path.html'), name='my_path'),
+    path('my_path/create/', login_required(CreateMyStudies.as_view(template_name = 'create_my_path.html')), name='create_my_path'),
+    path('my_path/create/submit', login_required(CreateMyStudies.as_view(template_name = 'create_my_path.html')), name='create_my_path'),
     path('post/', include('app.urls'))
 ]
