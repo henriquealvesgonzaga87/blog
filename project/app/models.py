@@ -39,3 +39,14 @@ class MyStudies(models.Model):
 
     def get_formatted_date(self):
         return f"{self.start_date.strftime('%m/%Y')} - {self.end_date.strftime('%m/%Y')}"
+
+
+class MyProjects(models.Model):
+    name = models.CharField(max_length=200)
+    link = models.URLField()
+    readme = models.URLField()
+    resume = models.TextField()
+    user_profile_id = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'myprojects'

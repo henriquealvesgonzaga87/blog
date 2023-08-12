@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
-from app.views import ListMyStudies, CreateMyStudies, UpdateMyStudies, DeleteMyStudies
+from app.views import ListMyStudies, CreateMyStudies, UpdateMyStudies, DeleteMyStudies, ListMyProject, CreateMyProject, UpdateMyProject, DeleteMyProject
 
 
 urlpatterns = [
@@ -30,5 +30,11 @@ urlpatterns = [
     path('my_path/update/<int:id>', login_required(UpdateMyStudies.as_view(template_name = 'create_my_path.html')), name='update_my_path'),
     path('my_path/update/<int:id>/submit', login_required(UpdateMyStudies.as_view(template_name = 'create_my_path.html')), name='update_my_path'),
     path('mypath/delete/<int:id>/', login_required(DeleteMyStudies.as_view(template_name = 'my_path.html')), name='delete_my_path'),
+    path('myproject/', ListMyProject.as_view(template_name = 'my_projects.html'), name='my_projects'),
+    path('myproject/create/', login_required(CreateMyProject.as_view(template_name='create_my_project.html')), name='create_my_project'),
+    path('myproject/create/submit', login_required(CreateMyProject.as_view(template_name='create_my_project.html')), name='create_my_project'),
+    path('myproject/update/<int:id>/', login_required(UpdateMyProject.as_view(template_name='create_my_project.html')), name='update_my_project'),
+    path('myproject/update/<int:id>/submit', login_required(UpdateMyProject.as_view(template_name='create_my_project.html')), name='update_my_project'),
+    path('myproject/delete/<int:id>/', login_required(DeleteMyProject.as_view(template_name='my_projects.html')), name='delete_my_project'),
     path('post/', include('app.urls'))
 ]
