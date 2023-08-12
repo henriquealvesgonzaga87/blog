@@ -116,3 +116,23 @@ class UpdateMyStudies(UpdateView, LoginRequiredMixin):
         else:
             form.save()
         return super().form_valid(form)
+
+
+class DeleteMyStudies(DeleteView, LoginRequiredMixin):
+    template_name = "create_my_path.html"
+    model = MyStudies
+    success_url = reverse_lazy('my_path')
+
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get('id')
+        return get_object_or_404(MyStudies, pk=pk)
+    
+    def delete(self, request, *args, **kwargs):
+        try:
+            messages.success(request, 'Deleted successfully.')
+            return super().delete(request, *args, **kwargs)
+        except Exception as e:
+            messages.error(request, 'Unable to delete.')
+            print(e)
+            return super().delete(request, *args, **kwargs)
+            
