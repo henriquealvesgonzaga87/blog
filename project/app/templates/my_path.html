@@ -17,6 +17,9 @@
               <form method="GET" action="{% url 'update_my_path' id=mystudies.id %}">
                 <button type="submit">Update</button>
               </form>
+              <form method="POST" action="{% url 'delete_my_path' id=mystudies.id %}">{% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
             {% endif %}
           </div>
         </div>

@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
-from app.views import ListMyStudies, CreateMyStudies, UpdateMyStudies
+from app.views import ListMyStudies, CreateMyStudies, UpdateMyStudies, DeleteMyStudies
 
 
 urlpatterns = [
@@ -29,5 +29,6 @@ urlpatterns = [
     path('my_path/create/submit', login_required(CreateMyStudies.as_view(template_name = 'create_my_path.html')), name='create_my_path'),
     path('my_path/update/<int:id>', login_required(UpdateMyStudies.as_view(template_name = 'create_my_path.html')), name='update_my_path'),
     path('my_path/update/<int:id>/submit', login_required(UpdateMyStudies.as_view(template_name = 'create_my_path.html')), name='update_my_path'),
+    path('mypath/delete/<int:id>/', login_required(DeleteMyStudies.as_view(template_name = 'my_path.html')), name='delete_my_path'),
     path('post/', include('app.urls'))
 ]
