@@ -12,4 +12,4 @@ class PostAdmmin(admin.ModelAdmin):
 
 @admin.register(MyStudies)
 class MyStudiesAdmin(admin.ModelAdmin):
-    fields = ['title', 'school', 'start_date', 'end_date', 'description', 'link', 'user_profile_id']
+    fields = ['title', 'school', 'start_date', 'end_date', 'description', 'link', 'logo', 'user_profile_id']

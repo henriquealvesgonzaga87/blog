@@ -13,6 +13,7 @@ class MyStudiesForms(forms.ModelForm):
     description = forms.CharField(widget=forms.Textarea)
     link = forms.URLField(null=True)
 
+
     class Meta:
         model = MyStudies
         fields = [
@@ -21,5 +22,5 @@ class MyStudiesForms(forms.ModelForm):
             'start_date',
             'end_date',
             'description',
-            'link'
+            'link',
         ]
