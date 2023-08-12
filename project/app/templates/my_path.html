@@ -1,0 +1,16 @@
+{% extends "model_page.html" %}
+
+{% block content %}
+<body>
+    {% for mystudies in page_obj %}
+    <section>
+        <p>{{ mystudies.title }}</p>
+        <p>{{ mystudies.school }}</p>
+        <p>{{ mystudies.get_formatted_date }}</p>
+        <p>{{ mystudies.description }}</p>
+        <p>{{ mystudies.link }}</p>
+    </section>
+    <br>
+    {% endfor %}
+</body>
+{% endblock %}
