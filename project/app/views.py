@@ -96,3 +96,23 @@ class CreateMyStudies(CreateView, LoginRequiredMixin):
             form.save()
         return super().form_valid(form)
     
+
+class UpdateMyStudies(UpdateView, LoginRequiredMixin):
+    template_name = "create_my_path.html"
+    model = MyStudies
+    fields = ['title', 'school', 'start_date', 'end_date', 'description', 'link']
+    success_url = reverse_lazy('my_path')
+
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get('id')
+        return get_object_or_404(MyStudies, pk=pk)
+
+    def form_valid(self, form):
+        try:
+            mystudies = form.save(commit=False)
+            mystudies.user_profile_id = User.objects.get(id=self.request.user.id)
+        except Exception:
+            messages.error('Impossible to save your form now')
+        else:
+            form.save()
+        return super().form_valid(form)
