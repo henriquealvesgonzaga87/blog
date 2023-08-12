@@ -12,6 +12,14 @@
             <p class="w3-text-teal"><a href="{{ myprojects.link }}" target="_blank">{{ myprojects.link }}</a></p>
             <p><a href="{{ myprojects.readme }}" target="_blank">Readme</a></p>
             <p>{{ myprojects.resume }}</p>
+            {% if user.is_authenticated %}
+              <form method="GET" action="{% url 'update_my_project' id=myprojects.id %}">
+                <button type="submit">Update</button>
+              </form>
+              <form method="POST" action="{% url 'delete_my_project' id=myprojects.id %}">{% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+            {% endif %}
           </div>
         </div>
     </div>

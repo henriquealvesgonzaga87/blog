@@ -158,3 +158,43 @@ class CreateMyProject(CreateView, LoginRequiredMixin):
         else:
             form.save()
         return super().form_valid(form)
+
+
+class UpdateMyProject(UpdateView, LoginRequiredMixin):
+    template_name = 'create_my_project.html'
+    model = MyProjects
+    fields = ['name', 'link', 'readme', 'resume']
+    success_url = reverse_lazy('my_projects')
+
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get('id')
+        return get_object_or_404(MyProjects, pk=pk)
+    
+    def form_valid(self, form):
+        try:
+            myprojects = form.save(commit=False)
+            myprojects.user_profile_id = User.objects.get(id=self.request.user.id)
+        except Exception:
+            messages.error('Error to save')
+        else:
+            form.save()
+        return super().form_valid(form)
+    
+
+class DeleteMyProject(DeleteView, LoginRequiredMixin):
+    template_name = 'my_projects'
+    model = MyProjects
+    success_url = reverse_lazy('my_projects')
+
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get('id')
+        return get_object_or_404(MyProjects, pk=pk)
+
+    def delete(self, request, *args, **kwargs):
+        try:
+            messages.success(request, 'Deleted successfully.')
+            return super().delete(request, *args, **kwargs)
+        except Exception as e:
+            messages.error(request, 'Unable to delete.')
+            print(e)
+            return super().delete(request, *args, **kwargs)
