@@ -13,3 +13,8 @@ class PostAdmmin(admin.ModelAdmin):
 @admin.register(MyStudies)
 class MyStudiesAdmin(admin.ModelAdmin):
     fields = ['title', 'school', 'start_date', 'end_date', 'description', 'link', 'logo', 'user_profile_id']
+
+@admin.register(MyProjects)
+class MyProjectsAdmin(admin.ModelAdmin):
+    fields = ['name', 'link', 'readme', 'resume']
+

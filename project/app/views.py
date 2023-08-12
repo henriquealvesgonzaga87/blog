@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Post, MyStudies
+from .models import Post, MyStudies, MyProjects
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
@@ -136,3 +136,25 @@ class DeleteMyStudies(DeleteView, LoginRequiredMixin):
             print(e)
             return super().delete(request, *args, **kwargs)
             
+
+class ListMyProject(ListView):
+    template_name = 'my_projects.html'
+    paginate_by = 10
+    model = MyProjects
+
+
+class CreateMyProject(CreateView, LoginRequiredMixin):
+    template_name = 'create_my_project.html'
+    model = MyProjects
+    fields = ['name', 'link', 'readme', 'resume']
+    success_url = reverse_lazy('my_projects')
+
+    def form_valid(self, form):
+        try:
+            myprojects = form.save(commit=False)
+            myprojects.user_profile_id = User.objects.get(id=self.request.user.id)
+        except Exception:
+            messages.error('Error to save')
+        else:
+            form.save()
+        return super().form_valid(form)

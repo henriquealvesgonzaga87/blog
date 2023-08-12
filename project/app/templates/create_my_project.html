@@ -1,0 +1,48 @@
+{% extends "model_page.html" %}
+
+{% block content %}
+    <main>
+        <div class="container">
+            <form method="post" id="myprojects-form">{% csrf_token %}
+                <div class="row">
+                    <div class="col-25">
+                      <label for="{{ form.name.id_for_label }}">Name</label>
+                    </div>
+                    <div class="col-75">
+                      {{ form.name }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-25">
+                      <label for="{{ form.link.id_for_label }}">Link</label>
+                    </div>
+                    <div class="col-75">
+                      {{ form.link }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-25">
+                      <label for="{{ form.readme.id_for_label }}">Readme</label>
+                    </div>
+                    <div class="col-75">
+                      {{ form.readme }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-25">
+                      <label for="{{ form.resume.id_for_label }}">Resume</label>
+                    </div>
+                    <div class="col-75">
+                      {{ form.resume }}
+                    </div>
+                  </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <input type="submit" value="Submit">
+                    <input type="reset" value="Clear">
+                  </div>
+            </form>
+        </div>
+    </main>
+{% endblock %}
