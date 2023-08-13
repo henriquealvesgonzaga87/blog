@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from app.views import ListMyStudies, CreateMyStudies, UpdateMyStudies, DeleteMyStudies, ListMyProject, CreateMyProject, UpdateMyProject, DeleteMyProject
-
+from core import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,5 +36,8 @@ urlpatterns = [
     path('myproject/update/<int:id>/', login_required(UpdateMyProject.as_view(template_name='create_my_project.html')), name='update_my_project'),
     path('myproject/update/<int:id>/submit', login_required(UpdateMyProject.as_view(template_name='create_my_project.html')), name='update_my_project'),
     path('myproject/delete/<int:id>/', login_required(DeleteMyProject.as_view(template_name='my_projects.html')), name='delete_my_project'),
-    path('post/', include('app.urls'))
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
+    path('login/submit', views.submit_login, name="submit_login"),
+    path('post/', include('app.urls')),
 ]
