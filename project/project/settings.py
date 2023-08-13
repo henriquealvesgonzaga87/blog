@@ -43,6 +43,12 @@ INSTALLED_APPS = [
     'project'
 ]
 
+LOGIN_URL = "submit_login"
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

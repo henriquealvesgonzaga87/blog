@@ -39,6 +39,11 @@
                 </div>
                 </div>
                 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+            {% if user.is_authenticated %}
+                <form action="{% url 'logout' %}" method="post" class="button4">{% csrf_token %}
+                    <input type="submit" class="button4" value="logout">
+                </form>
+            {% endif %}
         </div>
     </header>
 
