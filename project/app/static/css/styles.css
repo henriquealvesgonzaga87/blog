@@ -66,13 +66,8 @@ body {
 .content {padding:20px;}
 
 .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+  color: #fff!important;
   background-color: #75908bdb;
-  color: white;
-  text-align: center;
 }
 
 * {
