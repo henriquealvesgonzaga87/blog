@@ -7,6 +7,26 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
   height: inherit;
 }
 
-.xp {
-    background-image: url('xp.png');
+/* Create a Parallax Effect */
+.img-mypath {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.img-mypath {
+  background-image: url('mypath.jpg');
+  min-height: 50%;
+}
+
+.w3-wide {letter-spacing: 10px;}
+.w3-hover-opacity {cursor: pointer;}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1600px) {
+  .img-mypath {
+    background-attachment: scroll;
+    min-height: 400px;
+  }
 }
