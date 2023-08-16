@@ -31,7 +31,6 @@ class MyStudies(models.Model):
     description = models.TextField()
     link = models.URLField(null=True)
     user_profile_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    logo = models.ImageField(upload_to='..\static\css', null=True)
 
     class Meta:
         db_table = 'mystudies'
