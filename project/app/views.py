@@ -86,19 +86,19 @@ class CreateMyStudies(CreateView, LoginRequiredMixin):
     fields = ['title', 'school', 'start_date', 'end_date', 'description', 'link']
     success_url = reverse_lazy('my_path')
 
-
     def form_valid(self, form):
         try:
-            mystudies = form.save(commit=False)
-            mystudies.user_profile_id = User.objects.get(id=self.request.user.id)
-        except Exception:
-            messages.error('Impossible to save your form now')
+            myprojects = form.save(commit=False)
+            myprojects.user_profile_id = User.objects.get(id=self.request.user.id)
+        except Exception as e:
+            messages.error(self.request, f'Error to save {e}')
+            return self.form_invalid(form)
         else:
             form.save()
         return super().form_valid(form)
-    
 
-class UpdateMyStudies(UpdateView, LoginRequiredMixin):
+
+class UpdateMyStudies(UpdateView):
     template_name = "create_my_path.html"
     model = MyStudies
     fields = ['title', 'school', 'start_date', 'end_date', 'description', 'link']
@@ -112,8 +112,9 @@ class UpdateMyStudies(UpdateView, LoginRequiredMixin):
         try:
             mystudies = form.save(commit=False)
             mystudies.user_profile_id = User.objects.get(id=self.request.user.id)
-        except Exception:
-            messages.error('Impossible to save your form now')
+        except Exception as e:
+            messages.error(f'Impossible to save your form now: {e}')
+            print(e)
         else:
             form.save()
         return super().form_valid(form)
