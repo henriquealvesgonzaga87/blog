@@ -91,13 +91,9 @@ WSGI_APPLICATION = 'project.wsgi.application'
 #    }
 #}
 
-DATABASES = {
-        "default": dj_database_url.config(
-            conn_max_age=600,
-            conn_health_checks=True,
-            ssl_require=True,
-        ),
-    }
+DATABASES = {}
+
+DATABASES['default'] = dj_database_url.config()
 
 
 # Password validation
@@ -138,7 +134,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 APPEND_SLASH = False
-WHITENOISE_KEEP_ONLY_HASHED_FILES = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
