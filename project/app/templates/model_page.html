@@ -28,21 +28,35 @@
                 document.getElementById("myNav").style.width = "0%";
             }
         </script>
+        {% if user.is_authenticated %}
         <div class="header">
             <div id="myNav" class="overlay">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                 <div class="overlay-content">
                     <a href="{% url 'about_me' %}">About</a>
                     <a href="{% url 'my_projects' %}">Projects</a>
+                    <a href="{% url 'create_my_project' %}">Create Project</a>
                     <a href="{% url 'my_path' %}">My path</a>
+                    <a href="{% url 'create_my_path' %}">Create my Path</a>
                     <a href="mailto:henriquealves87@hotmail.com" target="_blank">Contact</a>
                 </div>
                 </div>
                 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-            {% if user.is_authenticated %}
                 <form action="{% url 'logout' %}" method="post" class="button4">{% csrf_token %}
                     <input type="submit" class="button4" value="logout">
                 </form>
+            {% else %}
+            <div class="header">
+                <div id="myNav" class="overlay">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <div class="overlay-content">
+                        <a href="{% url 'about_me' %}">About</a>
+                        <a href="{% url 'my_projects' %}">Projects</a>
+                        <a href="{% url 'my_path' %}">My path</a>
+                        <a href="mailto:henriquealves87@hotmail.com" target="_blank">Contact</a>
+                    </div>
+                    </div>
+                    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
             {% endif %}
         </div>
     </header>
