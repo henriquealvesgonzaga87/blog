@@ -149,3 +149,19 @@ section {
   font-size: 12px;
   border-radius: 8px;
 }
+
+.main-content {
+  padding-top: 0;
+}
+
+.main-content-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: var(--spacing-gutter-large);
+}
+
+.container {
+  max-width: 144rem;
+  margin: 0 auto;
+  padding: var(--spacing-gutter-medium);
+}

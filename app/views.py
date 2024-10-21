@@ -76,6 +76,7 @@ class DeletePost(LoginRequiredMixin, DeleteView):
 
 class ListMyStudies(ListView):
     template_name = 'my_path.html'
+    ordering = ["-id"]
     paginate_by = 10
     model = MyStudies
 

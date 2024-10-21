@@ -1,36 +1,30 @@
-{% extends "model_page.html" %}
+{% extends "model_page.html" %} 
 
 {% block content %}
 
 <div class="img-mypath w3-display-container w3-opacity-min" id="home">
-  <div class="w3-display-topleft" style="white-space:nowrap;">
-    <span class="w3-center w3-padding-large w3-xlarge w3-wide w3-animate-opacity">HAG <span class="w3-hide-small">Python</span> Dev</span>
+  <div class="w3-display-topleft" style="white-space: nowrap">
+    <span
+      class="w3-center w3-padding-large w3-xlarge w3-wide w3-animate-opacity"
+      >HAG <span class="w3-hide-small">Python</span> Dev</span
+    >
   </div>
 </div>
 
-    {% for mystudies in page_obj %}
 <section>
-    <div class="w3-main" style="margin-left:250px">
-
-        <div class="w3-row w3-padding-64">
-          <div class="w3-twothird w3-container">
-            <h1 class="w3-text-teal">{{ mystudies.title }}</h1>
-            <h2 class="w3-text-teal">{{ mystudies.school }}</h2>
-            <p>{{ mystudies.get_formatted_date }}</p>
-            <p>{{ mystudies.description }}</p>
-            <p>{{ mystudies.link }}</p>
-            {% if user.is_authenticated %}
-              <form method="GET" action="{% url 'update_my_path' id=mystudies.id %}">
-                <button type="submit">Update</button>
-              </form>
-              <form method="POST" action="{% url 'delete_my_path' id=mystudies.id %}">{% csrf_token %}
-                <button type="submit">Delete</button>
-            </form>
-            {% endif %}
-          </div>
-        </div>
-    </div>
-</section>
+  <div class="main-content main-content-list container">
+    {% for mystudies in page_obj %}
+        {% include "partials\study.html" %} 
+      {% if user.is_authenticated %}
+        <form method="GET" action="{% url 'update_my_path' id=mystudies.id %}">
+          <button type="submit">Update</button>
+        </form>
+        <form method="POST" action="{% url 'delete_my_path' id=mystudies.id %}">
+          {% csrf_token %}
+          <button type="submit">Delete</button>
+        </form>
+      {% endif %}
     {% endfor %}
-
+  </div>
+</section>
 {% endblock %}
