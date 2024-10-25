@@ -16,5 +16,5 @@ class MyStudiesAdmin(admin.ModelAdmin):
 
 @admin.register(MyProjects)
 class MyProjectsAdmin(admin.ModelAdmin):
-    fields = ['name', 'link', 'readme', 'resume']
+    fields = ['name', 'link', 'readme', 'resume', 'user_profile_id']
 
